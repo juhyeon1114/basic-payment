@@ -1,8 +1,6 @@
-package basic.basicpayment.domain.paymentDetails.model;
+package basic.basicpayment.model;
 
-import basic.basicpayment.domain.payment.model.Payment;
-import basic.basicpayment.global.model.BasicAuditEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import basic.basicpayment.model.common.BasicAuditEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

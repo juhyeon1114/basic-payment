@@ -1,4 +1,4 @@
-package basic.basicpayment.global.model;
+package basic.basicpayment.model.common;
 
 public enum BalanceCurrency {
 

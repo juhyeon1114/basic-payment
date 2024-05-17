@@ -1,16 +1,16 @@
-package basic.basicpayment.domain.payment.model;
+package basic.basicpayment.model;
 
-import basic.basicpayment.domain.appUser.model.AppUser;
-import basic.basicpayment.domain.merchant.model.Merchant;
-import basic.basicpayment.domain.paymentDetails.model.PaymentDetails;
-import basic.basicpayment.global.model.BalanceCurrency;
-import basic.basicpayment.global.model.BasicAuditEntity;
-import basic.basicpayment.global.model.PaymentMethod;
-import basic.basicpayment.global.model.PaymentStatus;
+import basic.basicpayment.model.common.BalanceCurrency;
+import basic.basicpayment.model.common.BasicAuditEntity;
+import basic.basicpayment.model.common.PaymentMethod;
+import basic.basicpayment.model.common.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -63,4 +63,20 @@ public class Payment extends BasicAuditEntity {
         if (appUser != null) appUser.getPayments().add(this);
     }
 
+    @Entity
+    @Getter
+    public static class Merchant extends BasicAuditEntity {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
+
+        @Setter
+        private String name;
+
+        @JsonIgnore
+        @OneToMany(mappedBy = "merchant")
+        private List<Payment> payments = new ArrayList<>();
+
+    }
 }

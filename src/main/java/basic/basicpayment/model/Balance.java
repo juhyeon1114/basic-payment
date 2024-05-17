@@ -1,8 +1,7 @@
-package basic.basicpayment.domain.balance.model;
+package basic.basicpayment.model;
 
-import basic.basicpayment.domain.appUser.model.AppUser;
-import basic.basicpayment.global.model.BalanceCurrency;
-import basic.basicpayment.global.model.BasicAuditEntity;
+import basic.basicpayment.model.common.BalanceCurrency;
+import basic.basicpayment.model.common.BasicAuditEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

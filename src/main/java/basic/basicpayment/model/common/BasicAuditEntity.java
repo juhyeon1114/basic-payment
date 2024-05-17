@@ -1,4 +1,4 @@
-package basic.basicpayment.global.model;
+package basic.basicpayment.model.common;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
