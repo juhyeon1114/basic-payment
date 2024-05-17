@@ -9,8 +9,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -63,20 +61,4 @@ public class Payment extends BasicAuditEntity {
         if (appUser != null) appUser.getPayments().add(this);
     }
 
-    @Entity
-    @Getter
-    public static class Merchant extends BasicAuditEntity {
-
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
-
-        @Setter
-        private String name;
-
-        @JsonIgnore
-        @OneToMany(mappedBy = "merchant")
-        private List<Payment> payments = new ArrayList<>();
-
-    }
 }
