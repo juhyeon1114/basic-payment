@@ -15,7 +15,7 @@ public class AppUser extends BasicAuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
 
     @Setter
     private String email;

@@ -15,8 +15,7 @@ import lombok.Setter;
 public class Payment extends BasicAuditEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @Setter
     @Enumerated(EnumType.STRING)

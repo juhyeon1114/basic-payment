@@ -1,5 +1,5 @@
 CREATE TABLE `app_user` (
-                            `user_id` bigint unsigned PRIMARY KEY AUTO_INCREMENT,
+                            `id` bigint unsigned PRIMARY KEY AUTO_INCREMENT,
                             `email` varchar(100) UNIQUE COMMENT '유저 이메일',
                             `updated_at` timestamp DEFAULT (now()),
                             `created_at` timestamp DEFAULT (now())
@@ -15,14 +15,14 @@ CREATE TABLE `balance` (
 );
 
 CREATE TABLE `merchant` (
-                            `id` bigint unsigned PRIMARY KEY AUTO_INCREMENT,
+                            `id` varchar(255) PRIMARY KEY,
                             `name` varchar(255) COMMENT '결제처 이름',
                             `updated_at` timestamp DEFAULT (now()),
                             `created_at` timestamp DEFAULT (now())
 );
 
 CREATE TABLE `payment` (
-                           `id` bigint unsigned PRIMARY KEY AUTO_INCREMENT,
+                           `id` varchar(255) PRIMARY KEY,
                            `user_id` bigint unsigned,
                            `merchant_id` bigint unsigned,
                            `payment_method` varchar(50) COMMENT 'creditCard',
@@ -53,9 +53,9 @@ CREATE INDEX `currency_index` ON `payment` (`currency`);
 
 CREATE INDEX `card_number_index` ON `payment_details` (`card_number`);
 
-ALTER TABLE `balance` ADD FOREIGN KEY (`user_id`) REFERENCES `app_user` (`user_id`);
+ALTER TABLE `balance` ADD FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`);
 
-ALTER TABLE `payment` ADD FOREIGN KEY (`user_id`) REFERENCES `app_user` (`user_id`);
+ALTER TABLE `payment` ADD FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`);
 
 ALTER TABLE `payment` ADD FOREIGN KEY (`merchant_id`) REFERENCES `merchant` (`id`);
 

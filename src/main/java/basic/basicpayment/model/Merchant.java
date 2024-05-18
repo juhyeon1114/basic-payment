@@ -14,8 +14,7 @@ import java.util.List;
 public class Merchant extends BasicAuditEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @Setter
     private String name;
