@@ -17,7 +17,7 @@ public class PaymentApprovalResponse {
     private BalanceCurrency currency;
     private LocalDateTime timestamp;
 
-    public static PaymentApprovalResponse success(Payment payment) {
+    public static PaymentApprovalResponse createWithEntity(Payment payment) {
         return new PaymentApprovalResponse(
                 payment.getId(),
                 payment.getStatus(),

@@ -3,6 +3,7 @@ package basic.basicpayment.model.payment;
 import basic.basicpayment.model.common.BalanceCurrency;
 import basic.basicpayment.model.common.PaymentMethod;
 import basic.basicpayment.model.paymentDetails.PaymentDetailsApprovalRequest;
+import basic.basicpayment.utils.FeeUtils;
 import lombok.*;
 
 @Getter
@@ -18,5 +19,9 @@ public class PaymentApprovalRequest {
     private String merchantId;
     private PaymentMethod paymentMethod;
     private PaymentDetailsApprovalRequest paymentDetails;
+
+    public Float amountTotal() {
+        return FeeUtils.addFee(amount);
+    }
 
 }

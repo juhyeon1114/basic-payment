@@ -1,6 +1,7 @@
 package basic.basicpayment.service;
 
 import basic.basicpayment.model.appUser.AppUser;
+import basic.basicpayment.model.common.PaymentStatus;
 import basic.basicpayment.model.merchant.Merchant;
 import basic.basicpayment.model.payment.PaymentApprovalRequest;
 import basic.basicpayment.model.dto.PaymentApprovalResponse;
@@ -29,24 +30,33 @@ public class PaymentService {
 
     public Payment create(PaymentDTO dto) {
         Payment entity = Payment.create(dto);
-        return paymentRepository.saveAndFlush(entity);
+        return paymentRepository.save(entity);
     }
 
     public PaymentApprovalResponse paymentApproval(PaymentApprovalRequest req) {
+        Payment payment;
         AppUser appUser = appUserRepository.findOneOrThrow(req.getUserId());
         Merchant merchant = merchantRepository.findOneOrThrow(req.getMerchantId());
 
         // Payment 생성
-        Payment payment = create(PaymentDTO.reqToDto(req, merchant, appUser));
+        payment = create(PaymentDTO.reqToDto(req, merchant, appUser));
+        try {
+            // PaymentDetails 생성
+            paymentDetailsService.create(PaymentDetailsDTO.reqToDTO(req.getPaymentDetails(), payment));
 
-        // PaymentDetails 생성
-        paymentDetailsService.create(PaymentDetailsDTO.reqToDTO(req.getPaymentDetails(), payment));
+            // Payment 상태 변경
+            payment.setStatus(PaymentStatus.approved);
+        } catch (Exception e) {
+            payment.setStatus(PaymentStatus.failed);
+            payment.setReason(e.getMessage());
+        }
 
-        // Balance 생성 및 수정
-        // ToDo
-        balanceService.createOrUpdateBalance(appUser.getId(), 0F, req.getCurrency());
+        if (payment.getStatus().equals(PaymentStatus.approved)) {
+            // Balance 생성 및 수정
+            balanceService.createOrUpdateBalance(appUser.getId(), req.amountTotal(), req.getCurrency());
+        }
 
-        return PaymentApprovalResponse.success(payment);
+        return PaymentApprovalResponse.createWithEntity(payment);
     }
 
 }

@@ -5,6 +5,7 @@ import basic.basicpayment.model.merchant.Merchant;
 import basic.basicpayment.model.common.BalanceCurrency;
 import basic.basicpayment.model.common.PaymentMethod;
 import basic.basicpayment.model.common.PaymentStatus;
+import basic.basicpayment.utils.FeeUtils;
 import lombok.*;
 
 @Getter
@@ -23,9 +24,9 @@ public class PaymentDTO {
     public static PaymentDTO reqToDto(PaymentApprovalRequest req, Merchant merchant, AppUser appUser) {
         return new PaymentDTO(
                 req.getPaymentMethod(),
-                req.getAmount(),
+                req.amountTotal(),
                 req.getCurrency(),
-                PaymentStatus.approved,
+                PaymentStatus.pending,
                 null,
                 merchant,
                 appUser
