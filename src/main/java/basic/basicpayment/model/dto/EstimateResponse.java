@@ -2,6 +2,7 @@ package basic.basicpayment.model.dto;
 
 import basic.basicpayment.model.common.BalanceCurrency;
 import basic.basicpayment.utils.FeeUtils;
+import basic.basicpayment.utils.MoneyUtils;
 import lombok.*;
 
 @Getter
@@ -15,6 +16,10 @@ public class EstimateResponse {
     public void setEstimateTotal(Float amount) {
         this.fees = FeeUtils.getFees(amount);
         this.estimateTotal = FeeUtils.addFee(amount);
+    }
+
+    public Float getEstimateTotal() {
+        return MoneyUtils.floorMoney(estimateTotal, currency);
     }
 
     public static EstimateResponse create(Float amount, BalanceCurrency currency) {
