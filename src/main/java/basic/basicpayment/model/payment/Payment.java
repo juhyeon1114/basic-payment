@@ -1,13 +1,19 @@
-package basic.basicpayment.model;
+package basic.basicpayment.model.payment;
 
+import basic.basicpayment.model.AppUser;
+import basic.basicpayment.model.Merchant;
 import basic.basicpayment.model.common.BalanceCurrency;
 import basic.basicpayment.model.common.BasicAuditEntity;
 import basic.basicpayment.model.common.PaymentMethod;
 import basic.basicpayment.model.common.PaymentStatus;
+import basic.basicpayment.model.paymentDetails.PaymentDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDate;
+import java.util.UUID;
 
 
 @Entity
@@ -35,6 +41,7 @@ public class Payment extends BasicAuditEntity {
     @Setter
     private String reason;
 
+    @Setter
     @JsonIgnore
     @OneToOne(mappedBy = "payment")
     private PaymentDetails paymentDetails;
@@ -47,6 +54,12 @@ public class Payment extends BasicAuditEntity {
     @JoinColumn(name = "user_id")
     private AppUser appUser;
 
+    // === Lifecycle ===
+    @PrePersist
+    public void prePersist() {
+        id = String.valueOf(UUID.randomUUID());
+    }
+
     // === 연관 메서드 ===
     public void updateMerchant(Merchant merchant) {
         if (this.merchant != null) this.merchant.getPayments().remove(this);
@@ -58,6 +71,19 @@ public class Payment extends BasicAuditEntity {
         if (this.appUser != null) this.appUser.getPayments().remove(this);
         this.appUser = appUser;
         if (appUser != null) appUser.getPayments().add(this);
+    }
+
+    // === 생성 메서드 ===
+    public static Payment create(PaymentDTO dto) {
+        Payment entity = new Payment();
+        entity.setPaymentMethod(dto.getPaymentMethod());
+        entity.setAmount(dto.getAmount());
+        entity.setCurrency(dto.getCurrency());
+        entity.setStatus(dto.getStatus());
+        entity.setReason(dto.getReason());
+        entity.updateMerchant(dto.getMerchant());
+        entity.updateUser(dto.getAppUser());
+        return entity;
     }
 
 }

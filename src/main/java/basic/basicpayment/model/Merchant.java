@@ -1,6 +1,7 @@
 package basic.basicpayment.model;
 
 import basic.basicpayment.model.common.BasicAuditEntity;
+import basic.basicpayment.model.payment.Payment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;

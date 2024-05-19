@@ -1,8 +1,8 @@
-package basic.basicpayment.model.dto;
+package basic.basicpayment.model.payment;
 
-import basic.basicpayment.model.PaymentDetails;
 import basic.basicpayment.model.common.BalanceCurrency;
 import basic.basicpayment.model.common.PaymentMethod;
+import basic.basicpayment.model.paymentDetails.PaymentDetailsApprovalRequest;
 import lombok.*;
 
 @Getter
@@ -17,6 +17,6 @@ public class PaymentApprovalRequest {
     private BalanceCurrency currency;
     private String merchantId;
     private PaymentMethod paymentMethod;
-    private PaymentDetails paymentDetails;
+    private PaymentDetailsApprovalRequest paymentDetails;
 
 }

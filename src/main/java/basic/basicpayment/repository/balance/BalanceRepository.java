@@ -1,4 +1,4 @@
-package basic.basicpayment.repository;
+package basic.basicpayment.repository.balance;
 
 import basic.basicpayment.model.Balance;
 import org.springframework.data.jpa.repository.JpaRepository;

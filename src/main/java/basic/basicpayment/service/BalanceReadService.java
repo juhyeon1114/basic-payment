@@ -3,7 +3,7 @@ package basic.basicpayment.service;
 import basic.basicpayment.model.AppUser;
 import basic.basicpayment.model.Balance;
 import basic.basicpayment.model.dto.UserBalanceResponse;
-import basic.basicpayment.repository.BalanceRepository;
+import basic.basicpayment.repository.balance.BalanceRepository;
 import basic.basicpayment.repository.appUser.AppUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
