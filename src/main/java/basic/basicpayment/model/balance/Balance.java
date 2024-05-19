@@ -1,5 +1,6 @@
-package basic.basicpayment.model;
+package basic.basicpayment.model.balance;
 
+import basic.basicpayment.model.appUser.AppUser;
 import basic.basicpayment.model.common.BalanceCurrency;
 import basic.basicpayment.model.common.BasicAuditEntity;
 import jakarta.persistence.*;
@@ -25,11 +26,26 @@ public class Balance extends BasicAuditEntity {
     @JoinColumn(name = "user_id")
     private AppUser appUser;
 
+    public void updateBalance(Float newBalance) {
+        balance += newBalance;
+    }
+
     // === 연관 메서드 ===
     public void updateUser(AppUser appUser) {
         if (this.appUser != null) this.appUser.getBalances().remove(this);
         this.appUser = appUser;
         if (appUser != null) appUser.getBalances().add(this);
     }
+
+    // === 생성 메서드 ===
+    public static Balance create(BalanceDTO dto) {
+        Balance entity = new Balance();
+        entity.setBalance(dto.getBalance());
+        entity.setCurrency(dto.getCurrency());
+        entity.updateUser(dto.getAppUser());
+        return entity;
+    }
+
+
 
 }

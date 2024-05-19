@@ -1,6 +1,7 @@
 package basic.basicpayment.service;
 
-import basic.basicpayment.model.*;
+import basic.basicpayment.model.appUser.AppUser;
+import basic.basicpayment.model.merchant.Merchant;
 import basic.basicpayment.model.payment.PaymentApprovalRequest;
 import basic.basicpayment.model.dto.PaymentApprovalResponse;
 import basic.basicpayment.model.payment.Payment;
@@ -24,6 +25,7 @@ public class PaymentService {
     private final MerchantRepository merchantRepository;
     private final PaymentDetailsService paymentDetailsService;
     private final PaymentRepository paymentRepository;
+    private final BalanceService balanceService;
 
     public Payment create(PaymentDTO dto) {
         Payment entity = Payment.create(dto);
@@ -39,6 +41,10 @@ public class PaymentService {
 
         // PaymentDetails 생성
         paymentDetailsService.create(PaymentDetailsDTO.reqToDTO(req.getPaymentDetails(), payment));
+
+        // Balance 생성 및 수정
+        // ToDo
+        balanceService.createOrUpdateBalance(appUser.getId(), 0F, req.getCurrency());
 
         return PaymentApprovalResponse.success(payment);
     }

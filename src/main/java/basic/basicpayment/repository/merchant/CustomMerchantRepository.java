@@ -1,6 +1,6 @@
 package basic.basicpayment.repository.merchant;
 
-import basic.basicpayment.model.Merchant;
+import basic.basicpayment.model.merchant.Merchant;
 import basic.basicpayment.repository.common.CustomRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

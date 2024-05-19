@@ -1,6 +1,6 @@
 package basic.basicpayment.repository.appUser;
 
-import basic.basicpayment.model.AppUser;
+import basic.basicpayment.model.appUser.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

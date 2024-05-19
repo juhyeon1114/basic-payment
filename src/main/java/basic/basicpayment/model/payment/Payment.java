@@ -1,7 +1,7 @@
 package basic.basicpayment.model.payment;
 
-import basic.basicpayment.model.AppUser;
-import basic.basicpayment.model.Merchant;
+import basic.basicpayment.model.appUser.AppUser;
+import basic.basicpayment.model.merchant.Merchant;
 import basic.basicpayment.model.common.BalanceCurrency;
 import basic.basicpayment.model.common.BasicAuditEntity;
 import basic.basicpayment.model.common.PaymentMethod;
@@ -12,7 +12,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 

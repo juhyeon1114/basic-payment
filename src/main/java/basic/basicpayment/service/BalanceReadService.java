@@ -1,7 +1,7 @@
 package basic.basicpayment.service;
 
-import basic.basicpayment.model.AppUser;
-import basic.basicpayment.model.Balance;
+import basic.basicpayment.model.appUser.AppUser;
+import basic.basicpayment.model.balance.Balance;
 import basic.basicpayment.model.dto.UserBalanceResponse;
 import basic.basicpayment.repository.balance.BalanceRepository;
 import basic.basicpayment.repository.appUser.AppUserRepository;

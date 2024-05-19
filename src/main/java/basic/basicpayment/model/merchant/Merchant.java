@@ -1,4 +1,4 @@
-package basic.basicpayment.model;
+package basic.basicpayment.model.merchant;
 
 import basic.basicpayment.model.common.BasicAuditEntity;
 import basic.basicpayment.model.payment.Payment;
@@ -12,21 +12,16 @@ import java.util.List;
 
 @Entity
 @Getter
-public class AppUser extends BasicAuditEntity {
+public class Merchant extends BasicAuditEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @Setter
-    private String email;
+    private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "appUser")
-    private List<Balance> balances = new ArrayList<>();
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "appUser")
+    @OneToMany(mappedBy = "merchant")
     private List<Payment> payments = new ArrayList<>();
 
 }
