@@ -30,4 +30,11 @@ public class AppUser extends BasicAuditEntity {
     @OneToMany(mappedBy = "appUser")
     private List<Payment> payments = new ArrayList<>();
 
+    // === 생성 메서드 ===
+    public static AppUser create(String email) {
+        AppUser entity = new AppUser();
+        entity.setEmail(email);
+        return entity;
+    }
+
 }

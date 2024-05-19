@@ -1,5 +1,6 @@
 package basic.basicpayment.service;
 
+import basic.basicpayment.exception.validation.PaymentValidator;
 import basic.basicpayment.model.appUser.AppUser;
 import basic.basicpayment.model.common.PaymentStatus;
 import basic.basicpayment.model.merchant.Merchant;
@@ -41,6 +42,9 @@ public class PaymentService {
         // Payment 생성
         payment = create(PaymentDTO.reqToDto(req, merchant, appUser));
         try {
+            // Validation
+            PaymentValidator.validateAmount(payment.getAmount());
+
             // PaymentDetails 생성
             paymentDetailsService.create(PaymentDetailsDTO.reqToDTO(req.getPaymentDetails(), payment));
 

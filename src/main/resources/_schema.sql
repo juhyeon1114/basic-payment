@@ -45,6 +45,8 @@ CREATE TABLE `payment_details` (
                                    `created_at` timestamp DEFAULT (now())
 );
 
+CREATE UNIQUE INDEX `user_id_currency_unique` ON `balance` (`user_id`, `currency`);
+
 CREATE INDEX `currency_index` ON `balance` (`currency`);
 
 CREATE INDEX `payment_method_index` ON `payment` (`payment_method`);

@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -23,5 +24,18 @@ public class Merchant extends BasicAuditEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "merchant")
     private List<Payment> payments = new ArrayList<>();
+
+    // === Lifecycle ===
+    @PrePersist
+    public void prePersist() {
+        id = String.valueOf(UUID.randomUUID());
+    }
+
+    // === 생성 메서드 ===
+    public static Merchant create(String name) {
+        Merchant entity = new Merchant();
+        entity.setName(name);
+        return entity;
+    }
 
 }
