@@ -4,9 +4,11 @@ import basic.basicpayment.model.common.BalanceCurrency;
 import basic.basicpayment.model.common.PaymentMethod;
 import basic.basicpayment.model.paymentDetails.PaymentDetailsApprovalRequest;
 import basic.basicpayment.utils.FeeUtils;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 @Getter
@@ -20,7 +22,7 @@ public class PaymentApprovalRequest {
     private Long userId;
 
     @NotNull(message = "금액을 입력해주세요.")
-    @Min(value = 0, message = "금액은 0보다 작을 수 없습니다.")
+    @Positive(message = "금액은 0보다 커야합니다.")
     private Float amount;
 
     @NotNull(message = "화폐 단위를 입력해주세요.")
@@ -32,6 +34,7 @@ public class PaymentApprovalRequest {
     @NotNull(message = "결제 수단을 입력해주세요.")
     private PaymentMethod paymentMethod;
 
+    @Valid
     private PaymentDetailsApprovalRequest paymentDetails;
 
     public Float amountTotal() {
