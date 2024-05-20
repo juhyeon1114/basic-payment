@@ -53,6 +53,15 @@ public class Payment extends BasicAuditEntity {
     @JoinColumn(name = "user_id")
     private AppUser appUser;
 
+    public void approved() {
+        setStatus(PaymentStatus.approved);
+    }
+
+    public void failed(String message) {
+        setStatus(PaymentStatus.failed);
+        setReason(message);
+    }
+    
     // === Lifecycle ===
     @PrePersist
     public void prePersist() {

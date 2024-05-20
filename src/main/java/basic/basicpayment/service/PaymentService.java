@@ -49,13 +49,12 @@ public class PaymentService {
             paymentDetailsService.create(PaymentDetailsDTO.reqToDTO(req.getPaymentDetails(), payment));
 
             // Payment 상태 변경
-            payment.setStatus(PaymentStatus.approved);
+            payment.approved();
         } catch (Exception e) {
-            payment.setStatus(PaymentStatus.failed);
-            payment.setReason(e.getMessage());
+            payment.failed(e.getMessage());
         }
 
-        if (payment.getStatus().equals(PaymentStatus.approved)) {
+        if (PaymentStatus.approved.equals(payment.getStatus())) {
             // Balance 생성 및 수정
             balanceService.createOrUpdateBalance(appUser.getId(), req.amountTotal(), req.getCurrency());
         }

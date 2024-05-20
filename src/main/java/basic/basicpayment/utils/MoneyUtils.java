@@ -9,7 +9,7 @@ import static basic.basicpayment.model.common.BalanceCurrency.USD;
 public class MoneyUtils {
 
     public static Float floorMoney(Float money, BalanceCurrency currency) {
-        if (currency.equals(USD)) {
+        if (USD.equals(currency)) {
             return (float) Math.floor(money * 100) / 100.0F;
         } else {
             return (float) Math.floor(money);
