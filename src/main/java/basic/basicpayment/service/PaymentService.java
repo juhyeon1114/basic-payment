@@ -34,6 +34,13 @@ public class PaymentService {
         return paymentRepository.save(entity);
     }
 
+    /**
+     * 결제 승인 메서드입니다.
+     * Payment, PaymentDetails를 순차적으로 생성하고, 이상이 없다면, Balance를 수정합니다.
+     *
+     * @param req PaymentApprovalRequest - 결제 승인을 위한 Request입니다.
+     * @return PaymentApprovalResponse - 결제 완료 후, 반환하는 결과입니다.
+     */
     public PaymentApprovalResponse paymentApproval(PaymentApprovalRequest req) {
         Payment payment;
         AppUser appUser = appUserRepository.findOneOrThrow(req.getUserId());
